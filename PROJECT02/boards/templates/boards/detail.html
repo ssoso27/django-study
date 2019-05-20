@@ -9,8 +9,13 @@
     <p>마지막 수정 시각 : {{ board.updated_at }}</p>
     <p>내용 : {{ board.content }}</p>
     
-    <a href="/boards/{{ board.pk }}/edit/">[글 수정]</a>
+    <a href='{% url 'boards:edit' board.pk %}'>[글 수정]</a>
     <a href="/boards/{{ board.pk }}/delete/">[글 삭제]</a>
-    <a href="/boards/">[게시판으로 돌아가기]</a>
+    <a href="{% url 'boards:index' %}">[게시판으로 돌아가기]</a>
+    
+    <form action='{% url 'boards:delete' board.pk %}', method='POST'>
+        {% csrf_token %}
+        <button>삭제</button>
+    </form>
     
 {% endblock %}

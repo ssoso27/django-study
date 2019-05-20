@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>1. 반복문</h1>
+    <p>
+        {% for menu in chiness_foods %}
+            <li>{{ menu }}</li>
+        {% endfor %}
+    </p>
+    <p>
+        {% for user in empty_list %}
+            <li>{{ user }}</li>
+        {% empty %}
+            현재 가입한 유저가 없습니다.
+        {% endfor %}
+    </p>
+    
+    <hr>
+    
+    <h1>2. 조건문</h1>
+    <p>
+        {% if '짜장면' in chiness_foods %}
+            메뉴에 짜장면이 존재합니다.
+        {% endif %}
+    </p>
+    <p>
+        {% for menu in chiness_foods %}
+            {{ forloop.counter }} 회 : 
+            {% if forloop.first %}
+                짜장면 + 고춧가루 <br>
+            {% else %}
+                {{ menu }} <br>
+            {% endif %}
+        {% endfor %}
+    </p>
+    
+    <hr>
+    
+    <h1>3. length filter 사용</h1>
+    <p>
+        {% for name in fruits %}
+            {% if name|length > 5 %}
+                {{ name }} : 글자가 너무 깁니다. <br>
+            {% else %}
+                {{ name }} : {{ name|length }} <br>
+            {% endif %}
+        {% endfor %}
+    </p>
+</body>
+</html>

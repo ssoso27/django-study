@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'boards',
     'django_extensions',
+    'imagekit',
 ]
 
 MIDDLEWARE = [
@@ -119,4 +120,10 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static/' # 웹페이지에서 사용할 정적파일의 url
+STATICFILES_DIRS = [ # 정적 파일이 위치한 경로
+    os.path.join(BASE_DIR, 'crud', 'assets', 'images'), # /crud/assets/images
+]
+
+MEDIA_URL = '/media/' # 업로드 이미지의 주소를 만들어줌. (실제 이미지 주소는 아님!!)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # 정적 파일의 업로드가 끝나면, 어디에 저장되게 할지를 설정하는 경로

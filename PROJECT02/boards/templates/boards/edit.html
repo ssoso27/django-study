@@ -1,14 +1,23 @@
 {% extends 'boards/base.html' %}
-
+{% load static %}
 {% block body %}
     <h1 class='text-center'>this is edit.html. it is to update board.</h1>
-    <form action='{% url 'boards:edit' board.pk %}' method="POST">
+    <p><b>기존 사진</b></p>
+    {% if board.image %}
+        <img src="{{ board.image.url }}" alt="{{ board.image }}"></img>
+    {% else %}
+        <img src="{% static 'hamtory.jpg' %}" alt="">
+    {% endif %}
+    <hr>
+    <form action='{% url 'boards:edit' board.pk %}' method="POST" enctype='multipart/form-data'>
         {% csrf_token %}
         <label for="title">Title</label>
         <input type="text" name="title" value="{{ board.title }}"/><br>
         
         <label for="content">Content</label>
         <textarea name="content" id="content" cols="30" rows="10">{{ board.content }}</textarea><br>
+        
+        <input type="file" name='image' accept='image/*' />
         
         <input type="submit" value="Submit"/>
     </form>

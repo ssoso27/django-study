@@ -8,9 +8,32 @@
     <p>작성시각 : {{ board.created_at }}</p>
     <p>마지막 수정 시각 : {{ board.updated_at }}</p>
     <p>내용 : {{ board.content }}</p>
+    <hr>
+
+    <h3><b>댓글 ({{ comments | length }}개)</b></h3>
     
+    <form action="{% url 'boards:comments_create' board.pk %}" method='POST'>
+        {% csrf_token %}     
+        댓글 달기 : <input type="text" name="content"/>
+        <input type="submit" value="Submit"/>
+    </form>    
+    
+    <p>
+        {% for comment in comments %}
+            <li>
+                {{ comment.content }}
+                <form action='{% url 'boards:comment_delete' board.pk comment.pk %}', method='POST' style="display:inline">
+                    {% csrf_token %}
+                    <button>삭제</button>
+                </form>
+            </li>
+        {% empty %}
+            아직 댓글이 없습니다.
+        {% endfor %}
+    </p>
+    
+    <hr>
     <a href='{% url 'boards:edit' board.pk %}'>[글 수정]</a>
-    <a href="/boards/{{ board.pk }}/delete/">[글 삭제]</a>
     <a href="{% url 'boards:index' %}">[게시판으로 돌아가기]</a>
     
     <form action='{% url 'boards:delete' board.pk %}', method='POST'>

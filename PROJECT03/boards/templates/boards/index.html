@@ -10,10 +10,12 @@
     <h1>this is index</h1>
     {% for board in boards %}
         <p>
+            [{{ board.pk }}]
             <li>{{ board.title }}</li>
             <li>{{ board.content }}</li>
             <li>{{ board.created_at }}</li>
             <li>{{ board.updated_at }}</li>
+            <a href="{% url 'boards:detail' board.pk %}">[상세보기]</a>
         </p>
         <hr>
     {% endfor %}

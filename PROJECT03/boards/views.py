@@ -18,3 +18,7 @@ def new(request):
     else:
         # new 페이지 보여줌
         return render(request, 'boards/new.html')
+        
+def detail(request, pk):
+    board = Board.objects.get(pk=pk)
+    return render(request, 'boards/detail.html', {'board': board})

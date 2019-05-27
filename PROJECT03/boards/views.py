@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Board
 
 # Create your views here.
 def index(request):
     boards = Board.objects.all()
     return render(request, 'boards/index.html', {'boards' : boards})
-    
+
+@login_required    
 def new(request):
     if request.method == 'POST':
         # create 수행

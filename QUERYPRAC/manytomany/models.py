@@ -9,6 +9,7 @@ class Doctor(models.Model):
 
 class Patient(models.Model):
     name = models.CharField(max_length=20)
+    doctors = models.ManyToManyField(Doctor, through='Reservation') # Reservation을 통해서 담당 의사 목록 받아옴
     
     def __str__(self):
         return f'{self.id}번 환자 {self.name}'
